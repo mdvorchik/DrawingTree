@@ -2,14 +2,12 @@ package org.mipt.drawer;
 
 import com.tinkerpop.blueprints.Vertex;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-//        JOptionPane.showMessageDialog(null, "Custom class demo");
-//        JFrame myFrame = new JFrame();
-//        myFrame.setSize(1024, 1024);
-//        myFrame.setVisible(true);
         InputStream is = GraphMLParser.class.getClassLoader().getResourceAsStream("full_binary_5.xml");
         if (args.length > 0) {
             try {
@@ -25,12 +23,24 @@ public class Main {
         binaryTreeDrawer.drawTreeToFile("tree.png");
         String s = args.length > 0 ? args[0] : "";
         System.out.println("Done! " + s);
-        PrintWriter outFile = null;
-        try {
-            outFile = new PrintWriter(new FileOutputStream(new File("tree.png")));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        outFile.println();
+
+        EventQueue.invokeLater(() -> {
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ignored) {
+            }
+
+            ImageIcon icon = new ImageIcon("tree.png");
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Hello world",
+                    "Hello", JOptionPane.INFORMATION_MESSAGE,
+                    icon);
+            JOptionPane.showMessageDialog(
+                    null,
+                    new JLabel("Hello world", icon, JLabel.LEFT),
+                    "Hello", JOptionPane.INFORMATION_MESSAGE);
+
+        });
     }
 }
