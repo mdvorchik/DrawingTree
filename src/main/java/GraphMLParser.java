@@ -1,32 +1,35 @@
-import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Graph;
-import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GraphMLParser {
-    private static final String XML_FILE = "full_binary_5.xml";
+    private Graph graph;
 
-    public static void main(String[] args) throws Exception {
-        Graph graph = new TinkerGraph();
+    public GraphMLParser(String xmlFileName) {
+        this.graph = new TinkerGraph();
         GraphMLReader reader = new GraphMLReader(graph);
+        InputStream is = GraphMLParser.class.getClassLoader().getResourceAsStream(xmlFileName);
 
-        InputStream is = GraphMLParser.class.getClassLoader().getResourceAsStream(XML_FILE);
-        reader.inputGraph(is);
+        try {
+            reader.inputGraph(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        Iterable<Vertex> vertices = graph.getVertices();
+    public List<Edge> getAllEdgesFromXMLFile() {
+        List<Edge> edges = new ArrayList<>();
 
-        for (Vertex vertex : vertices) {
-            Iterable<Edge> edges = vertex.getEdges(Direction.IN);
-            for (Edge edge : edges) {
-                Vertex outVertex = edge.getVertex(Direction.OUT);
-                Vertex inVertex = edge.getVertex(Direction.IN);
-            }
+        for (Edge edge : graph.getEdges()) {
+            edges.add(edge);
         }
 
-        System.out.println("End work");
+        return edges;
     }
 }
