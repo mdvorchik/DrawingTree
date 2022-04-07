@@ -1,2 +1,0 @@
-language = "java11"
-run = "java -jar target/DrawingTree-1.0-SNAPSHOT.jar"
