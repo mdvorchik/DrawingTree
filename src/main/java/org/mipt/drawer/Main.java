@@ -33,14 +33,9 @@ public class Main {
             ImageIcon icon = new ImageIcon("tree.png");
             JOptionPane.showMessageDialog(
                     null,
-                    "Hello world",
-                    "Hello", JOptionPane.INFORMATION_MESSAGE,
+                    "Tree",
+                    "Tree", JOptionPane.INFORMATION_MESSAGE,
                     icon);
-            JOptionPane.showMessageDialog(
-                    null,
-                    new JLabel("Hello world", icon, JLabel.LEFT),
-                    "Hello", JOptionPane.INFORMATION_MESSAGE);
-
         });
     }
 }
