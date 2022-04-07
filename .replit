@@ -1,2 +1,2 @@
 language = "java11"
-run = "java -jar target/DrawingTree-1.0-SNAPSHOT.jar"
+run = "java -jar target/DrawingTree-1.0-SNAPSHOT-jar-with-dependencies.jar bin_tree.xml"
