@@ -4,7 +4,9 @@ import com.tinkerpop.blueprints.Vertex;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class Main {
         Vertex rootVertex = graphMLParser.getRootVertex();
         BinaryTreeDrawer binaryTreeDrawer = new BinaryTreeDrawer(rootVertex);
 
-        binaryTreeDrawer.drawTreeToFile("tree.png");
+        binaryTreeDrawer.drawTreeToFile("graph.png");
         String s = args.length > 0 ? args[0] : "";
         System.out.println("Done! " + s);
 
@@ -30,11 +32,11 @@ public class Main {
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ignored) {
             }
 
-            ImageIcon icon = new ImageIcon("tree.png");
+            ImageIcon icon = new ImageIcon("graph.png");
             JOptionPane.showMessageDialog(
                     null,
-                    "Tree",
-                    "Tree", JOptionPane.INFORMATION_MESSAGE,
+                    "Graph",
+                    "Graph", JOptionPane.INFORMATION_MESSAGE,
                     icon);
         });
     }
